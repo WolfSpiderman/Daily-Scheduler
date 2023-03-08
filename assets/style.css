@@ -1,8 +1,15 @@
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
+    background: rgb(0, 0, 0);
   }
   
+  header {
+    text-align: center;
+    cursor: default;
+    background: linear-gradient(rgba(184, 0, 184, 1), rgba(255, 75, 75, 0.6));
+  }
+
   textarea {
     background: transparent;
     border: none;

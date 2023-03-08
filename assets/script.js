@@ -1,6 +1,8 @@
 var saveBtn = $('.saveBtn');
 var userInput = $('.description');
 var hourBlock = $('.time-block');
+var today = $('#currentDay');
+
  // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
@@ -17,31 +19,35 @@ $(function () {
     // attribute of each time-block be used to conditionally add or remove the
     // past, present, and future classes? How can Day.js be used to get the
     // current hour in 24-hour time?
-    //
-    //  for (var i = 9; i < 22; i++) {
-    //  if (currentHour > i) {
     //  
-    // for (var i = 9; i < 22; i++) {
-    //     if (currentHour > i) {
-    //         hourBlock.removeClass('future present').addClass('past');
-    //     } else if (currentHour === i) {
-    //         hourBlock.removeClass('future past').addClass('present');
-    //     } else if (currentHour < i) {
-    //         hourBlock.removeClass('present past').addClass('future');
-    //     }
+    // function saveText(event) {
+    //     var h = event.target("#hourX");
+    //     localStorage.setItem("textHour" + h, userInput);
     // }
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+
+    var currentHour = dayjs().format('H');
+    for (var i = 9; i < 22; i++) {
+        if (currentHour > i) {
+            $('#hour-' + i).removeClass('future present').addClass('past');
+        } else if (currentHour === i) {
+            $('#hour-' + i).removeClass('future past').addClass('present');
+        } else if (currentHour < i) {
+            $('#hour-' + i).removeClass('present past').addClass('future');
+        }
+        
+        var textHourMemory = localStorage.getItem("textHour" + i);
+        if (textHourMemory !== null) {
+            $('#hour-' + i).userInput.text = textHourMemory;
+        }
+    }
     //
     // TODO: Add code to get any user input that was saved in localStorage and set
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
+    setInterval(function() {
+        today.text(dayjs().format('[Today is ] dddd, MMMM D, YYYY. hh:mm:ss a'));
+    }, 100)
+        
   });

@@ -64,3 +64,20 @@ body {
     font-size: 20px;
     transition: all 0.3s ease-in-out;
   }
+ /* changed bootstraps btn-close positioning only after testing in dev tools, as well as media queries updating the positioning as needed */
+  .btn-close {
+    position: absolute;
+    right: 11vw;
+  }
+
+  @media (max-width: 906px) {
+    .btn-close {
+        right: 12vw
+    }
+  }
+
+  @media (max-width: 690px) {
+    .btn-close {
+        right: 21vw
+    }
+}

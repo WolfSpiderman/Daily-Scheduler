@@ -2,6 +2,7 @@ var saveBtn = $('.saveBtn');
 var userInput = $('.description');
 var hourBlock = $('.time-block');
 var today = $('#currentDay');
+var closeBtn = $('.btn-close');
 
 // this function did not need to be in the doc.ready function since it is activated by the user with a button
 function saveText(event) {
@@ -14,6 +15,17 @@ function saveText(event) {
     console.log(savedInput);
     localStorage.setItem(`savedText-${h.attr("id")}`, savedInput);
 }
+
+function deleteText(event) {
+    var where = $(event.target).parent('.time-block');
+    console.log(where);
+    console.log(where.attr('id'));
+    var what = where.find('.description');
+    console.log(what);
+    what.val("");
+    what.attr("placeholder", "Data is still saved to local storage if you don't click the save button.");
+}
+
 $(document).ready(function () {
     // after page is fully loaded, this function checks local storage for each time block and loads any saved inputs
     $('textarea.description').each(function()
@@ -26,6 +38,7 @@ $(document).ready(function () {
     });
 
     saveBtn.on("click", saveText);
+    closeBtn.on("click", deleteText);
 
     // time tracker for past, present, future functionality
     var currentHour = dayjs().format('H');
@@ -40,7 +53,7 @@ $(document).ready(function () {
     }
     // clock set on interval to keep it up to date
     setInterval(function() {
-        today.text(dayjs().format('[Today is ] dddd, MMMM D, YYYY. hh:mm a'));
+        today.text(dayjs().format('[Today is ] dddd, MMMM D, YYYY [at] hh:mm a'));
     }, 1000)
         
   });

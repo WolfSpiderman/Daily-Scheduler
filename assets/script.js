@@ -45,7 +45,8 @@ $(document).ready(function () {
     closeBtn.on("click", deleteText);
 
     // time tracker for past, present, future functionality
-    var currentHour = dayjs().format('H');
+    setInterval(function() {
+        var currentHour = dayjs().format('H');
     for (var i = 9; i < 22; i++) {
         if (currentHour > i) {
             $('#hour-' + i).removeClass('future present').addClass('past');
@@ -55,9 +56,10 @@ $(document).ready(function () {
             $('#hour-' + i).removeClass('present past').addClass('future');
         }
     }
+    }, 60000);
     // clock set on interval to keep it up to date
     setInterval(function() {
         today.text(dayjs().format('[Today is ] dddd, MMMM D, YYYY [at] hh:mm a'));
-    }, 1000)
+    }, 1000);
         
   });

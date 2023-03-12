@@ -22,8 +22,12 @@ function deleteText(event) {
     console.log(where.attr('id'));
     var what = where.find('.description');
     console.log(what);
+    var storageCheck = localStorage.getItem(`savedText-${where.attr("id")}`);
+    console.log(storageCheck);
     what.val("");
+    if (storageCheck !== null && storageCheck !== "") {
     what.attr("placeholder", "Data is still saved to local storage if you don't click the save button.");
+    }
 }
 
 $(document).ready(function () {
